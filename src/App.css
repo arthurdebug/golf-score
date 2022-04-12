@@ -1,12 +1,14 @@
 @media (min-width: 100px)
 {
-header{
+.App-header{
   background-size:cover;
   background-color: blanchedalmond;
   width: 100%;
   overflow-x:auto;
   height: 100%;
   flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
 }
 input{
   width: 32px;
@@ -14,8 +16,7 @@ input{
 table thead th:first-child {
   position: sticky;
   left: 0;
- 
-  z-index: 1;
+  z-index: 2;
   background-color: blanchedalmond;
 }
 
@@ -23,12 +24,12 @@ table tbody th:first-child {
   position: sticky;
   left: 0;
   background: blanchedalmond;
-  z-index: 1;
+  z-index: 2;
 }
 
 .lockPlace{
   position: sticky;
-  z-index: 1;
+  z-index: 3;
   left: 0;
 }
 .last{
@@ -54,6 +55,11 @@ table tbody th:first-child {
   padding-left:0;
   text-align:center;
  
+}
+
+.test {
+  position:absolute;
+   z-index:10
 }
 table {
   border: 1px solid black;
