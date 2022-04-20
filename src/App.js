@@ -1,11 +1,14 @@
 import './App.css';
-import React , { useState, useEffect } from "react";
+import React , { useState, useEffect} from "react";
 import { Table,FormGroup,Label,Input, Col, Row,Container, Button} from 'reactstrap';
 import { IoGolf } from "react-icons/io5";
 import { FaGolfBall } from "react-icons/fa";
 import { MdGolfCourse,MdSportsScore } from "react-icons/md";
+import {Drive,Patt} from "./Components/Data";
+import HoleCount from './Components/HoleCount';
 
 function App() {
+
   const golfCourse = [
     {label:'East', 
     par: [5,4,3,4,3,5,4,3,4,5,4,4,3,4,3,5,4,5],
@@ -13,6 +16,9 @@ function App() {
     {label:'North', 
     par: [5,4,3,4,4,4,3,5,4,4,3,5,4,3,4,4,5,4],
     difficulty:[5,11,9,3,13,15,17,7,1,4,12,2,18,6,14,16,8]},
+    {label:'South', 
+    par: [4,3,4,4,3,4,4,4,4,4,3,4,4,4,5,3,4,4],
+    difficulty:[5,11,1,17,7,15,9,13,3,16,14,4,10,2,8,6,18,12]},
   ]
   const options = [
     { value: '1', label: '1' },
@@ -112,8 +118,8 @@ function App() {
       <div>H3 SI {courseState?.difficulty[2]}</div>
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -122,9 +128,9 @@ function App() {
       <Container className='holes' >
       <div>H4 SI {courseState?.difficulty[3]}</div>
         <Row>
-          <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
+        <Col><FaGolfBall/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -133,9 +139,9 @@ function App() {
         <Container className="holes">
         <div>H5 SI {courseState?.difficulty[4]}</div>
         <div className='holeHead'>
+          <div>Par</div>
           <div>Drive</div>
           <div>Putt</div>
-          <div>Par</div>
           <div>Total</div>
         </div>
           </Container>
@@ -144,9 +150,9 @@ function App() {
       <Container className='holes' >
       <div>H6 SI {courseState?.difficulty[5]}</div>
           <div className='holeHead'>
+          <div>Par</div>
           <div>Drive</div>
           <div>Putt</div>
-          <div>Par</div>
           <div>Total</div>
         </div>
           </Container>
@@ -155,9 +161,9 @@ function App() {
       <Container className='holes' >
       <div>H7 SI {courseState?.difficulty[6]}</div>
         <Row>
-          <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
+        <Col><FaGolfBall/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -167,8 +173,8 @@ function App() {
       <div>H8 SI {courseState?.difficulty[7]}</div>
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -177,9 +183,9 @@ function App() {
       <Container className='holes' >
       <div>H9 SI {courseState?.difficulty[8]}</div>
         <Row>
-          <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
+         <Col><FaGolfBall/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -189,8 +195,8 @@ function App() {
       <div>H10 SI {courseState?.difficulty[9]}</div>
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -200,8 +206,8 @@ function App() {
       <div>H11 SI {courseState?.difficulty[10]}</div>
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -211,8 +217,8 @@ function App() {
       <div>H12 SI {courseState?.difficulty[11]}</div>
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -222,8 +228,8 @@ function App() {
       <div>H13 SI {courseState?.difficulty[12]}</div>
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -233,8 +239,8 @@ function App() {
       <div>H14 SI {courseState?.difficulty[13]}</div>
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -244,8 +250,8 @@ function App() {
       <div>H15 SI {courseState?.difficulty[14]}</div>
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -254,9 +260,9 @@ function App() {
       <Container className='holes' >
       <div>H16 SI {courseState?.difficulty[15]}</div>
         <Row>
-          <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
+        <Col><FaGolfBall/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -266,8 +272,8 @@ function App() {
       <div>H17 SI {courseState?.difficulty[16]}</div>
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -276,9 +282,9 @@ function App() {
       <Container className='holes' >
       <div>H18 SI {courseState?.difficulty[17]}</div>
         <Row>
-          <Col><FaGolfBall/></Col>
-          <Col><MdGolfCourse/></Col>
+        <Col><FaGolfBall/></Col>
           <Col><IoGolf/></Col>
+          <Col><MdGolfCourse/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -298,7 +304,7 @@ function App() {
             id="exampleSelect"
             name="select"
             type="select"
-            value={options} >
+            value={options.label} >
               {options.map(item => {
                   return (<option key={item.label} value={item.label}>{item.label}</option>);
               })}
@@ -306,184 +312,60 @@ function App() {
   </FormGroup>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[0]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[0]}/>
+      
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[1]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+       <HoleCount parValue={courseState?.par[1]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[2]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[2]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[3]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[3]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[4]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[4]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[5]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[5]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[6]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[6]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[7]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[7]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[8]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[8]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[9]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[9]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[10]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[10]}/>
+      </td>
+
+      <td>
+       <HoleCount parValue={courseState?.par[11]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[11]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[12]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[12]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[13]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[13]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[14]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[14]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[15]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[15]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[16]}/>
       </td>
       <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[16]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
-      </td>
-      <td>
-      <Container className='holes' >
-        <Row className='gx-0 g-0'>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-          <Col><input id="typeNumber" value={courseState?.par[17]}></input></Col>
-          <Col><input id="typeNumber"></input></Col>
-        </Row>
-          </Container>
+      <HoleCount parValue={courseState?.par[17]}/>
       </td>
       </tr>
     
