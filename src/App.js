@@ -1,14 +1,13 @@
 import './App.css';
-import React , { useState, useEffect} from "react";
+import React , { useState, useEffect, useReducer} from "react";
 import { Table,FormGroup,Label,Input, Col, Row,Container, Button} from 'reactstrap';
 import { IoGolf } from "react-icons/io5";
 import { FaGolfBall } from "react-icons/fa";
 import { MdGolfCourse,MdSportsScore } from "react-icons/md";
-import {Drive,Patt} from "./Components/Data";
 import HoleCount from './Components/HoleCount';
+import {totalSwing} from "./Components/Data";
 
 function App() {
-
   const golfCourse = [
     {label:'East', 
     par: [5,4,3,4,3,5,4,3,4,5,4,4,3,4,3,5,4,5],
@@ -41,6 +40,11 @@ function App() {
     { value: '18', label: '18' }
   ]
   const [courseState, setCourseState] = useState();
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+  function onClickCounter() {
+    forceUpdate();
+  }
+  
   useEffect(() => {
     setCourseState(golfCourse[0]);
   }, []);
@@ -51,13 +55,42 @@ function App() {
     setCourseState(selectedCourseState);
     console.log(courseState)
   };
-    
+  function refreshPage() {
+    window.location.reload(false);
+  }
+  let t1=Number(totalSwing[0].swing.reduce(
+    (accumulator, currentValue) => accumulator + currentValue, 0
+    ))
+  let t2=Number(totalSwing[1].swing.reduce(
+      (accumulator, currentValue) => accumulator + currentValue, 0
+      ))
+  let t3=Number(totalSwing[2].swing.reduce(
+        (accumulator, currentValue) => accumulator + currentValue, 0
+        ))
+  let t4=Number(totalSwing[3].swing.reduce(
+          (accumulator, currentValue) => accumulator + currentValue, 0
+          ))
+
+          let s1=Number(totalSwing[0].scoreTotal.reduce(
+            (accumulator, currentValue) => accumulator + currentValue, 0
+            ))
+          let s2=Number(totalSwing[1].scoreTotal.reduce(
+              (accumulator, currentValue) => accumulator + currentValue, 0
+              ))
+          let s3=Number(totalSwing[2].scoreTotal.reduce(
+                (accumulator, currentValue) => accumulator + currentValue, 0
+                ))
+          let s4=Number(totalSwing[3].scoreTotal.reduce(
+                  (accumulator, currentValue) => accumulator + currentValue, 0
+                  ))
+  let date= Date()
+
+
   return (
     <div className="App">
       <header className="App-header">
-        
         <p className='lockPlace'>
-          Golf Score v0.5
+          Golf Score v1 {date}
         </p>
         <Label className='lockPlace'>
       Location
@@ -93,7 +126,7 @@ function App() {
       </th>
       <th>
       <Container className='holes' >
-      <div>H1 SI {courseState?.difficulty[0]}</div> 
+      <div>H1 SI {courseState?.difficulty[0]} Par {courseState?.par[0]}</div> 
         <Row>
           <Col><FaGolfBall/></Col>
           <Col><MdGolfCourse/></Col>
@@ -103,188 +136,188 @@ function App() {
           </Container>
       </th>
       <th>
-        <Container className="holes">
-        <div>H2 SI {courseState?.difficulty[1]}</div>
-        <Row className='g-0'>
-          <Col><FaGolfBall/></Col>
-          <Col>Putt</Col>
-          <Col>Par</Col>
-          <Col>Total</Col>
-        </Row>
-          </Container>
-      </th>
-      <th>
       <Container className='holes' >
-      <div>H3 SI {courseState?.difficulty[2]}</div>
+      <div>H2 SI {courseState?.difficulty[1]} Par {courseState?.par[1]}</div> 
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
           <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
       </th>
       <th>
       <Container className='holes' >
-      <div>H4 SI {courseState?.difficulty[3]}</div>
-        <Row>
-        <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
-          <Col><MdGolfCourse/></Col>
-          <Col><MdSportsScore/></Col>
-        </Row>
-          </Container>
-      </th>
-      <th>
-        <Container className="holes">
-        <div>H5 SI {courseState?.difficulty[4]}</div>
-        <div className='holeHead'>
-          <div>Par</div>
-          <div>Drive</div>
-          <div>Putt</div>
-          <div>Total</div>
-        </div>
-          </Container>
-      </th>
-      <th>
-      <Container className='holes' >
-      <div>H6 SI {courseState?.difficulty[5]}</div>
-          <div className='holeHead'>
-          <div>Par</div>
-          <div>Drive</div>
-          <div>Putt</div>
-          <div>Total</div>
-        </div>
-          </Container>
-      </th>
-      <th>
-      <Container className='holes' >
-      <div>H7 SI {courseState?.difficulty[6]}</div>
-        <Row>
-        <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
-          <Col><MdGolfCourse/></Col>
-          <Col><MdSportsScore/></Col>
-        </Row>
-          </Container>
-      </th>
-      <th>
-      <Container className='holes' >
-      <div>H8 SI {courseState?.difficulty[7]}</div>
+      <div>H3 SI {courseState?.difficulty[2]} Par {courseState?.par[2]}</div> 
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
           <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
       </th>
       <th>
       <Container className='holes' >
-      <div>H9 SI {courseState?.difficulty[8]}</div>
-        <Row>
-         <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
-          <Col><MdGolfCourse/></Col>
-          <Col><MdSportsScore/></Col>
-        </Row>
-          </Container>
-      </th>
-      <th>
-      <Container className='holes' >
-      <div>H10 SI {courseState?.difficulty[9]}</div>
+      <div>H4 SI {courseState?.difficulty[3]} Par {courseState?.par[3]}</div> 
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
           <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
       </th>
       <th>
       <Container className='holes' >
-      <div>H11 SI {courseState?.difficulty[10]}</div>
+      <div>H5 SI {courseState?.difficulty[4]} Par {courseState?.par[4]}</div> 
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
           <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
       </th>
       <th>
       <Container className='holes' >
-      <div>H12 SI {courseState?.difficulty[11]}</div>
+      <div>H6 SI {courseState?.difficulty[5]} Par {courseState?.par[5]}</div> 
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
           <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
       </th>
       <th>
       <Container className='holes' >
-      <div>H13 SI {courseState?.difficulty[12]}</div>
+      <div>H7 SI {courseState?.difficulty[6]} Par {courseState?.par[6]}</div> 
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
           <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
       </th>
       <th>
       <Container className='holes' >
-      <div>H14 SI {courseState?.difficulty[13]}</div>
+      <div>H8 SI {courseState?.difficulty[7]} Par {courseState?.par[7]}</div> 
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
           <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
       </th>
       <th>
       <Container className='holes' >
-      <div>H15 SI {courseState?.difficulty[14]}</div>
+      <div>H9 SI {courseState?.difficulty[8]} Par {courseState?.par[8]}</div> 
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
           <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
       </th>
       <th>
       <Container className='holes' >
-      <div>H16 SI {courseState?.difficulty[15]}</div>
-        <Row>
-        <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
-          <Col><MdGolfCourse/></Col>
-          <Col><MdSportsScore/></Col>
-        </Row>
-          </Container>
-      </th>
-      <th>
-      <Container className='holes' >
-      <div>H17 SI {courseState?.difficulty[16]}</div>
+      <div>H10 SI {courseState?.difficulty[9]} Par {courseState?.par[9]}</div> 
         <Row>
           <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
           <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
       </th>
       <th>
       <Container className='holes' >
-      <div>H18 SI {courseState?.difficulty[17]}</div>
+      <div>H11 SI {courseState?.difficulty[10]} Par {courseState?.par[10]}</div> 
         <Row>
-        <Col><FaGolfBall/></Col>
-          <Col><IoGolf/></Col>
+          <Col><FaGolfBall/></Col>
           <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
+          <Col><MdSportsScore/></Col>
+        </Row>
+          </Container>
+      </th>
+      <th>
+      <Container className='holes' >
+      <div>H12 SI {courseState?.difficulty[11]} Par {courseState?.par[11]}</div> 
+        <Row>
+          <Col><FaGolfBall/></Col>
+          <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
+          <Col><MdSportsScore/></Col>
+        </Row>
+          </Container>
+      </th>
+      <th>
+      <Container className='holes' >
+      <div>H13 SI {courseState?.difficulty[12]} Par {courseState?.par[12]}</div> 
+        <Row>
+          <Col><FaGolfBall/></Col>
+          <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
+          <Col><MdSportsScore/></Col>
+        </Row>
+          </Container>
+      </th>
+      <th>
+      <Container className='holes' >
+      <div>H14 SI {courseState?.difficulty[13]} Par {courseState?.par[13]}</div> 
+        <Row>
+          <Col><FaGolfBall/></Col>
+          <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
+          <Col><MdSportsScore/></Col>
+        </Row>
+          </Container>
+      </th>
+      <th>
+      <Container className='holes' >
+      <div>H15 SI {courseState?.difficulty[14]} Par {courseState?.par[14]}</div> 
+        <Row>
+          <Col><FaGolfBall/></Col>
+          <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
+          <Col><MdSportsScore/></Col>
+        </Row>
+          </Container>
+      </th>
+      <th>
+      <Container className='holes' >
+      <div>H16 SI {courseState?.difficulty[15]} Par {courseState?.par[15]}</div> 
+        <Row>
+          <Col><FaGolfBall/></Col>
+          <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
+          <Col><MdSportsScore/></Col>
+        </Row>
+          </Container>
+      </th>
+      <th>
+      <Container className='holes' >
+      <div>H17 SI {courseState?.difficulty[16]} Par {courseState?.par[16]}</div> 
+        <Row>
+          <Col><FaGolfBall/></Col>
+          <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
+          <Col><MdSportsScore/></Col>
+        </Row>
+          </Container>
+      </th>
+      <th>
+      <Container className='holes' >
+      <div>H18 SI {courseState?.difficulty[17]} Par {courseState?.par[17]}</div> 
+        <Row>
+          <Col><FaGolfBall/></Col>
+          <Col><MdGolfCourse/></Col>
+          <Col><IoGolf/></Col>
           <Col><MdSportsScore/></Col>
         </Row>
           </Container>
@@ -295,8 +328,8 @@ function App() {
   <tbody>
   <tr>
       <th scope="row">
-        CH Lai
-        <div>Score</div>
+        <Input placeholder={totalSwing[0].player}>{totalSwing[0].player}</Input>
+        <div>total{t1}<br></br>Score{s1}</div>
       </th>
       <td>
       <FormGroup>
@@ -312,69 +345,289 @@ function App() {
   </FormGroup>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[0]}/>
+      <HoleCount parValue={courseState?.par[0]} playerValue={0} holeValue={0} siValue={courseState?.difficulty[0]}/>
       
       </td>
       <td>
-       <HoleCount parValue={courseState?.par[1]}/>
+      <HoleCount parValue={courseState?.par[1]} playerValue={0} holeValue={1}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[2]}/>
+      <HoleCount parValue={courseState?.par[2]} playerValue={0} holeValue={2}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[3]}/>
+      <HoleCount parValue={courseState?.par[3]} playerValue={0} holeValue={3}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[4]}/>
+      <HoleCount parValue={courseState?.par[4]} playerValue={0} holeValue={4}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[5]}/>
+      <HoleCount parValue={courseState?.par[5]} playerValue={0} holeValue={5}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[6]}/>
+      <HoleCount parValue={courseState?.par[6]} playerValue={0} holeValue={6}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[7]}/>
+      <HoleCount parValue={courseState?.par[7]} playerValue={0} holeValue={7}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[8]}/>
+      <HoleCount parValue={courseState?.par[8]} playerValue={0} holeValue={8}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[9]}/>
+      <HoleCount parValue={courseState?.par[9]} playerValue={0} holeValue={9}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[10]}/>
-      </td>
-
-      <td>
-       <HoleCount parValue={courseState?.par[11]}/>
+      <HoleCount parValue={courseState?.par[10]} playerValue={0} holeValue={10}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[12]}/>
+      <HoleCount parValue={courseState?.par[11]} playerValue={0} holeValue={11}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[13]}/>
+      <HoleCount parValue={courseState?.par[12]} playerValue={0} holeValue={12}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[14]}/>
+      <HoleCount parValue={courseState?.par[13]} playerValue={0} holeValue={13}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[15]}/>
+      <HoleCount parValue={courseState?.par[14]} playerValue={0} holeValue={14}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[16]}/>
+      <HoleCount parValue={courseState?.par[15]} playerValue={0} holeValue={15}/>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[17]}/>
+      <HoleCount parValue={courseState?.par[16]} playerValue={0} holeValue={16}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[17]} playerValue={0} holeValue={17}/>
       </td>
       </tr>
-    
+      <tr>
+      <th scope="row">
+        <Input placeholder={totalSwing[1].player} >{totalSwing[1].player}</Input>
+        <div>total{t2}<br></br>Score{s2}</div>
+      </th>
+      <td>
+      <FormGroup>
+            <Input  
+            id="exampleSelect"
+            name="select"
+            type="select"
+            value={options.label} >
+              {options.map(item => {
+                  return (<option key={item.label} value={item.label}>{item.label}</option>);
+              })}
+            </Input>
+  </FormGroup>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[0]} playerValue={1} holeValue={0} siValue={courseState?.difficulty[0]}/>
+      
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[1]} playerValue={1} holeValue={1}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[2]} playerValue={1} holeValue={2}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[3]} playerValue={1} holeValue={3}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[4]} playerValue={1} holeValue={4}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[5]} playerValue={1} holeValue={5}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[6]} playerValue={1} holeValue={6}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[7]} playerValue={1} holeValue={7}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[8]} playerValue={1} holeValue={8}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[9]} playerValue={1} holeValue={9}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[10]} playerValue={1} holeValue={10}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[11]} playerValue={1} holeValue={11}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[12]} playerValue={1} holeValue={12}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[13]} playerValue={1} holeValue={13}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[14]} playerValue={1} holeValue={14}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[15]} playerValue={1} holeValue={15}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[16]} playerValue={1} holeValue={16}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[17]} playerValue={1} holeValue={17}/>
+      </td>
+      </tr>
+      <tr>
+      <th scope="row">
+        <Input placeholder={totalSwing[2].player}>{totalSwing[2].player}</Input>
+        <div>total{t3}<br></br>Score{s3}</div>
+      </th>
+      <td>
+      <FormGroup>
+            <Input  
+            id="exampleSelect"
+            name="select"
+            type="select"
+            value={options.label} >
+              {options.map(item => {
+                  return (<option key={item.label} value={item.label}>{item.label}</option>);
+              })}
+            </Input>
+  </FormGroup>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[0]} playerValue={2} holeValue={0} siValue={courseState?.difficulty[0]}/>
+      
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[1]} playerValue={2} holeValue={1}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[2]} playerValue={2} holeValue={2}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[3]} playerValue={2} holeValue={3}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[4]} playerValue={2} holeValue={4}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[5]} playerValue={2} holeValue={5}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[6]} playerValue={2} holeValue={6}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[7]} playerValue={2} holeValue={7}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[8]} playerValue={2} holeValue={8}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[9]} playerValue={2} holeValue={9}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[10]} playerValue={2} holeValue={10}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[11]} playerValue={2} holeValue={11}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[12]} playerValue={2} holeValue={12}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[13]} playerValue={2} holeValue={13}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[14]} playerValue={2} holeValue={14}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[15]} playerValue={2} holeValue={15}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[16]} playerValue={2} holeValue={16}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[17]} playerValue={2} holeValue={17}/>
+      </td>
+      </tr>
+      <tr>
+      <th scope="row">
+        <Input placeholder={totalSwing[3].player}>{totalSwing[3].player}</Input>
+        <div>total{t4}<br></br>Score{s4}</div>
+      </th>
+      <td>
+      <FormGroup>
+            <Input  
+            id="exampleSelect"
+            name="select"
+            type="select"
+            value={options.label} >
+              {options.map(item => {
+                  return (<option key={item.label} value={item.label}>{item.label}</option>);
+              })}
+            </Input>
+  </FormGroup>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[0]} playerValue={3} holeValue={0} siValue={courseState?.difficulty[0]}/>
+      
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[1]} playerValue={3} holeValue={1}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[2]} playerValue={3} holeValue={2}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[3]} playerValue={3} holeValue={3}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[4]} playerValue={3} holeValue={4}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[5]} playerValue={3} holeValue={5}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[6]} playerValue={3} holeValue={6}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[7]} playerValue={3} holeValue={7}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[8]} playerValue={3} holeValue={8}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[9]} playerValue={3} holeValue={9}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[10]} playerValue={3} holeValue={10}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[11]} playerValue={3} holeValue={11}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[12]} playerValue={3} holeValue={12}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[13]} playerValue={3} holeValue={13}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[14]} playerValue={3} holeValue={14}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[15]} playerValue={3} holeValue={15}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[16]} playerValue={3} holeValue={16}/>
+      </td>
+      <td>
+      <HoleCount parValue={courseState?.par[17]} playerValue={3} holeValue={17}/>
+      </td>
+      </tr>
     </tbody>
             </Table>
           </div>
         </div>
       </div>
-      <div className='lockPlace'> <Button>Add Player</Button> <Button>Clear</Button></div>
+      <div className='lockPlace' onClick={onClickCounter}> <Button>update</Button> <Button onClick={refreshPage}>Clear</Button></div>
 <p className='lockPlace last'>Created By Arthur 2022</p>
 </header>
 </div>
