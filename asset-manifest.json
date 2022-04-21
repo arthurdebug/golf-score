@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/golf-score/static/css/main.718f9242.css",
+    "main.js": "/golf-score/static/js/main.bcc50e8b.js",
+    "static/js/787.ea38211d.chunk.js": "/golf-score/static/js/787.ea38211d.chunk.js",
+    "index.html": "/golf-score/index.html",
+    "main.718f9242.css.map": "/golf-score/static/css/main.718f9242.css.map",
+    "main.bcc50e8b.js.map": "/golf-score/static/js/main.bcc50e8b.js.map",
+    "787.ea38211d.chunk.js.map": "/golf-score/static/js/787.ea38211d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.718f9242.css",
+    "static/js/main.bcc50e8b.js"
+  ]
+}
