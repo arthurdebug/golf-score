@@ -47,7 +47,9 @@ let totalScore= Number(score)+Number(extra)
 function updateSwing(array, index, newValue) {
   array[index] = newValue;
 }
-
+let quick = 0 
+if (state.drive==[]){quick=0}
+else{ quick=total-props.parValue}
 let newVal = total;
 if (props.playerValue==0){
 updateSwing(totalSwing[0].swing, props.holeValue, newVal);
@@ -63,15 +65,15 @@ updateSwing(totalSwing[0].swing, props.holeValue, newVal);
     }
     
     let newScore = totalScore;
-    if (props.playerValue==0){
+    if (props.playerValue==0 & state.drive>1){
       updateScore(totalSwing[0].scoreTotal, props.holeValue, newScore);
-    }else if (props.playerValue==1){
+    }else if (props.playerValue==1 & state.drive>1){
       updateScore(totalSwing[1].scoreTotal, props.holeValue, newScore);
-    } else if (props.playerValue==2){
+    } else if (props.playerValue==2& state.drive>1 ){
       updateScore(totalSwing[2].scoreTotal, props.holeValue, newScore);
-      } else{
+      } else if(props.playerValue==3& state.drive>1 ){
         updateScore(totalSwing[3].scoreTotal, props.holeValue, newScore);
-        }
+        } else {newScore=0}
 
 return(
 <Container className='holes' >
@@ -109,7 +111,7 @@ return(
             name="select"
             type="select"
             >
-                <option>{total-props.parValue}</option>
+                <option>{quick}</option>
             </Input>
           </Col>
           <Col>
