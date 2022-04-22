@@ -32,7 +32,7 @@ if (Number(total-props.parValue)<=-2){
 }else {
   score = 0;}
 let extra = 0
-if (state.putt==="1a"){
+/*if (state.putt==="1a"){
   extra=4
 }else if (state.putt==="1b"){
   extra=3;
@@ -42,13 +42,14 @@ if (state.putt==="1a"){
   extra=1;
 }else if (state.putt==="0"){
   extra=5;}
-  else {extra=0;}
-let totalScore= Number(score)+Number(extra)
+  else {extra=0;}*/
+let bonus=0
+let totalScore= Number(score)+Number(bonus)
 function updateSwing(array, index, newValue) {
   array[index] = newValue;
 }
 let quick = 0 
-if (state.drive<=1){quick=null}
+if (state.drive<1){quick=null}
 else{ quick=total-props.parValue}
 let newVal = total;
 if (props.playerValue==0){

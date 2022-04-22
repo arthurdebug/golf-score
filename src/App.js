@@ -5,7 +5,7 @@ import { IoGolf } from "react-icons/io5";
 import { FaGolfBall } from "react-icons/fa";
 import { MdGolfCourse,MdSportsScore } from "react-icons/md";
 import HoleCount from './Components/HoleCount';
-import {totalSwing} from "./Components/Data";
+import {totalSwing,options} from "./Components/Data";
 
 function App() {
   const golfCourse = [
@@ -19,26 +19,21 @@ function App() {
     par: [4,3,4,4,3,4,4,4,4,4,3,4,4,4,5,3,4,4],
     difficulty:[5,11,1,17,7,15,9,13,3,16,14,4,10,2,8,6,18,12]},
   ]
-  const options = [
-    { value: '1', label: '1' },
-    { value: '2', label: '2' },
-    { value: '3', label: '3' },
-    { value: '4', label: '4' },
-    { value: '5', label: '5' },
-    { value: '6', label: '6'},
-    { value: '7', label: '7' },
-    { value: '8', label: '8' },
-    { value: '9', label: '9'},
-    { value: '10', label: '10'},
-    { value: '11', label: '11'},
-    { value: '12', label: '12'},
-    { value: '13', label: '13' },
-    { value: '14', label: '14' },
-    { value: '15', label: '15' },
-    { value: '16', label: '16' },
-    { value: '17', label: '17' },
-    { value: '18', label: '18' }
-  ]
+  const [state, setState] = React.useState({
+    p1:[],
+    p2:[],
+    p3:[],
+    p4:[]
+  })
+function handleHandyChange(evt) {
+    const value = evt.target.value;
+    setState({
+      ...state,
+      [evt.target.name]: value
+    });
+    console.log("test",totalSwing[0].swing);
+  }
+  
   const [courseState, setCourseState] = useState();
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
   function onClickCounter() {
@@ -90,7 +85,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p className='lockPlace'>
-          Golf Score v1 {date}
+          Golf Score v1.1 {date}
         </p>
         <Label className='lockPlace'>
       Location
@@ -329,15 +324,18 @@ function App() {
   <tr>
       <th scope="row">
         <Input placeholder={totalSwing[0].player}>{totalSwing[0].player}</Input>
-        <div>total{t1}<br></br>Score{s1}</div>
+        <div><h8 style={{color:"lightblue"}}>{t1}</h8>
+        <br></br><h8 style={{color:"grey"}}>{s1}</h8>
+        <br></br><h8 style={{color:"Green"}}>Green 1</h8></div>
       </th>
       <td>
       <FormGroup>
             <Input  
             id="exampleSelect"
-            name="select"
+            name="p1"
             type="select"
-            value={options.label} >
+            value={state.p1}
+            onChange={handleHandyChange} >
               {options.map(item => {
                   return (<option key={item.label} value={item.label}>{item.label}</option>);
               })}
@@ -345,7 +343,7 @@ function App() {
   </FormGroup>
       </td>
       <td>
-      <HoleCount parValue={courseState?.par[0]} playerValue={0} holeValue={0} siValue={courseState?.difficulty[0]}/>
+      <HoleCount parValue={courseState?.par[0]} playerValue={0} holeValue={0} handyValue={state?.p1[0]} siValue={courseState?.difficulty[0]}/>
       
       </td>
       <td>
