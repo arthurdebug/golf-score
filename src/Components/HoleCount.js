@@ -4,6 +4,7 @@ import '../App.css';
 import {Drive,Patt,totalSwing} from "./Data";
 
 const HoleCount=(props)=>{
+ 
   const [state, setState] = React.useState({
     par:[],
     drive:[],
@@ -15,13 +16,14 @@ function handleChange(evt) {
       ...state,
       [evt.target.name]: value
     });
-    console.log("test",totalSwing[0].swing);
+    console.log("test",evt.target.value);
   }
 let puttScore=0
 if (isNaN(state.putt)==true){puttScore=1}
 else{puttScore=Number(state.putt)}
-
-let total = Number(state.drive)+Number(puttScore)
+let total=0
+if(props.driveValue==0){ total = Number(state.drive)+Number(puttScore)}
+else { total=Number(props.driveValue)+Number(props.puttValue)}
 let score = 0
 if (Number(total-props.parValue)<=-2){
   score = 8;
@@ -45,26 +47,40 @@ let extra = 0
   else {extra=0;}*/
 let bonus=0
 let totalScore= Number(score)+Number(bonus)
+if (state.drive<1){totalScore=null}
 function updateSwing(array, index, newValue) {
   array[index] = newValue;
 }
 let quick = 0 
-if (state.drive<1){quick=null}
+let newDrive= Number(state.drive)
+if (state.drive<1 && props.driveValue<1){quick=null}
 else{ quick=total-props.parValue}
-let newVal = total;
 if (props.playerValue==0){
-updateSwing(totalSwing[0].swing, props.holeValue, newVal);
+updateSwing(totalSwing[0].drive, props.holeValue,newDrive);
 }else if (props.playerValue==1){
-  updateSwing(totalSwing[1].swing, props.holeValue, newVal);
+  updateSwing(totalSwing[1].drive, props.holeValue, newDrive);
 } else if (props.playerValue==2){
-    updateSwing(totalSwing[2].swing, props.holeValue, newVal);
+    updateSwing(totalSwing[2].drive, props.holeValue,newDrive);
   } else{
-      updateSwing(totalSwing[3].swing, props.holeValue, newVal);
+      updateSwing(totalSwing[3].drive, props.holeValue,newDrive);
     }
+    let newPutt= Number(state.putt)
+    if (props.playerValue==0){
+      updateSwing(totalSwing[0].putt, props.holeValue,newPutt);
+      }else if (props.playerValue==1){
+        updateSwing(totalSwing[1].putt, props.holeValue, newPutt);
+      } else if (props.playerValue==2){
+          updateSwing(totalSwing[2].putt, props.holeValue,newPutt);
+        } else{
+            updateSwing(totalSwing[3].putt, props.holeValue,newPutt);
+          }
+      
+
+
     function updateScore(array, index, newScore) {
       array[index] = newScore;
     }
-    
+   
     let newScore = totalScore;
     if (props.playerValue==0 & state.drive>=1){
       updateScore(totalSwing[0].scoreTotal, props.holeValue, newScore);
@@ -84,10 +100,11 @@ return(
             id="exampleSelect"
             name="drive"
             type="select"
-            multiple={false}
             onChange={handleChange}
             value={state.drive}
+            placeholder={null}
             >
+           <option >{props.driveValue}</option>
               {Drive.map(item => {
                   return (<option key={item.label} value={item.value}>{item.label}</option>);
               })}
@@ -98,10 +115,10 @@ return(
             id="exampleSelect"
             name="putt"
             type="select"
-            multiple={false}
             onChange={handleChange}
             value={state.putt}
             >
+              <option>{props.puttValue}</option>
               {Patt.map(item => {
                   return (<option key={item.label} value={item.label}>{item.label}</option>);
               })}
