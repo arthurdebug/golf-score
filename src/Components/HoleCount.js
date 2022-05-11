@@ -4,7 +4,7 @@ import '../App.css';
 import {Drive,Patt,totalSwing} from "./Data";
 
 const HoleCount=(props)=>{
- 
+  let player=props.playerValue
   const [state, setState] = React.useState({
     par:[],
     drive:[],
@@ -22,8 +22,9 @@ let puttScore=0
 if (isNaN(state.putt)==true){puttScore=1}
 else{puttScore=Number(state.putt)}
 let total=0
-if(props.driveValue==0){ total = Number(state.drive)+Number(puttScore)}
-else { total=Number(props.driveValue)+Number(props.puttValue)}
+if(props.driveValue==0 ){ total = Number(state.drive)+Number(puttScore)}
+else if (props.driveValue>0 && state.drive==0 ){ total=Number(props.driveValue)+Number(props.puttValue)}
+else { total = Number(state.drive)+Number(puttScore)}
 let score = 0
 if (Number(total-props.parValue)<=-2){
   score = 8;
@@ -47,15 +48,25 @@ let extra = 0
   else {extra=0;}*/
 let bonus=0
 let totalScore= Number(score)+Number(bonus)
-if (state.drive<1){totalScore=null}
+if (state.drive<1 & props.driveValue<1){totalScore=null}
 function updateSwing(array, index, newValue) {
   array[index] = newValue;
 }
 let quick = 0 
 let newDrive= Number(state.drive)
+if (props.driveValue>0){
+  updateSwing(totalSwing[player].drive, props.holeValue,props.driveValue)}
+  else {updateSwing(totalSwing[player].drive, props.holeValue,newDrive)};
+
+let newPutt= Number(state.putt)
+  if (props.driveValue>0){
+    updateSwing(totalSwing[player].putt, props.holeValue,props.puttValue)}
+    else {updateSwing(totalSwing[player].putt, props.holeValue,newPutt)};
+
 if (state.drive<1 && props.driveValue<1){quick=null}
-else{ quick=total-props.parValue}
-if (props.playerValue==0){
+else { quick=total-props.parValue}
+
+/*if (props.playerValue==0){
 updateSwing(totalSwing[0].drive, props.holeValue,newDrive);
 }else if (props.playerValue==1){
   updateSwing(totalSwing[1].drive, props.holeValue, newDrive);
@@ -74,7 +85,8 @@ updateSwing(totalSwing[0].drive, props.holeValue,newDrive);
         } else{
             updateSwing(totalSwing[3].putt, props.holeValue,newPutt);
           }
-      
+  */
+
 
 
     function updateScore(array, index, newScore) {
